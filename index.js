@@ -1,9 +1,10 @@
 const connection = require('./db/connect');
+const cTable = require('console.table');
 
 // simple query
-let sqlQuery = 'CREATE DATABASE notedatabase';
+let sql = 'SELECT * FROM `department`';
 
-connection.query(sqlQuery, (err, results) => {
+connection.query(sql, (err, results) => {
   if (err) throw err;
-  console.log('Database created'); // results contains rows returned by server
+  console.table(results); // results contains rows returned by server
 });
