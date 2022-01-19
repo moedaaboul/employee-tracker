@@ -1,48 +1,63 @@
-const managerQuestions = [
+// should require managers
+let managers = [];
+const departments = ['Engineering', 'Finance', 'Legal', 'Sales', 'Service'];
+const roles = [
+  'Sales Lead',
+  'Salesperson',
+  'Lead Engineer',
+  'Software Engineer',
+  'Account Manager',
+  'Accountant',
+  'Legal Team Lead',
+  'Lawyer',
+  'Customer Service',
+];
+
+const addEmployeeQuestions = [
   {
     type: 'input',
-    message: 'Enter the team manager name',
-    name: 'name',
+    message: `What is the employee's first name?`,
+    name: 'firstName',
     validate: isRequired,
   },
   {
     type: 'input',
-    message: 'Enter the manager employee ID',
-    name: 'id',
+    message: 'What is the salary of the role?',
+    name: 'lastName',
     validate: isRequired,
   },
   {
     type: 'input',
-    message: 'Enter the manager email address',
-    name: 'email',
-    validate: isEmail,
+    message: `What is the employee's role?`,
+    name: 'role',
+    choices: roles,
   },
   {
     type: 'input',
-    message: 'What the manager office number',
-    name: 'officeNumber',
-    validate: isRequired,
+    message: `Who is the employee's manager?`,
+    name: 'manager',
+    choices: ['None', ...managers],
   },
 ];
 
-const engineerQuestions = [
+const addRoleQuestions = [
   {
     type: 'input',
-    message: 'Enter the employee name',
+    message: 'What is the name of the role?',
     name: 'name',
     validate: isRequired,
   },
   {
     type: 'input',
-    message: 'Enter the employee ID',
-    name: 'id',
+    message: 'What is the salary of the role?',
+    name: 'salary',
     validate: isRequired,
   },
   {
     type: 'input',
-    message: 'Enter the employee email address',
-    name: 'email',
-    validate: isEmail,
+    message: 'Which department does the role belong to?',
+    name: 'department',
+    choices: departments,
   },
   {
     type: 'input',
@@ -52,29 +67,26 @@ const engineerQuestions = [
   },
 ];
 
-const internQuestions = [
+const updateEmployeeRoleQuestions = [
+  {
+    type: 'list',
+    message: `Which employee's role do you want to update`,
+    name: 'role',
+    choices: managers,
+  },
+  {
+    type: 'list',
+    message: 'Which role do you want to assign the selected employee?',
+    name: 'assignTo',
+    choices: roles,
+  },
+];
+
+const addDepartmentQuestion = [
   {
     type: 'input',
-    message: 'Enter the employee name',
+    message: 'What is the name of the department?',
     name: 'name',
-    validate: isRequired,
-  },
-  {
-    type: 'input',
-    message: 'Enter the employee ID',
-    name: 'id',
-    validate: isRequired,
-  },
-  {
-    type: 'input',
-    message: 'Enter the employee email address',
-    name: 'email',
-    validate: isEmail,
-  },
-  {
-    type: 'input',
-    message: 'What is your school name?',
-    name: 'school',
     validate: isRequired,
   },
 ];
@@ -98,8 +110,9 @@ const furtherActionQuestion = [
 ];
 
 module.exports = {
-  engineerQuestions,
-  internQuestions,
-  managerQuestions,
+  addEmployeeQuestions,
+  addRoleQuestions,
+  addDepartmentQuestion,
   furtherActionQuestion,
+  updateEmployeeRoleQuestions,
 };
