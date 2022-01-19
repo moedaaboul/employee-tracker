@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/moedaaboul/employee-tracker#readme",
   "dependencies": {
+    "dotenv": "^14.2.0",
     "inquirer": "^8.2.0",
     "mysql2": "^2.3.3"
   },
