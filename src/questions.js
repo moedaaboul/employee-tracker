@@ -59,12 +59,6 @@ const addRoleQuestions = [
     name: 'department',
     choices: departments,
   },
-  {
-    type: 'input',
-    message: 'What is your github account name?',
-    name: 'github',
-    validate: isRequired,
-  },
 ];
 
 const updateEmployeeRoleQuestions = [
