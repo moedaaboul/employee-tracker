@@ -44,8 +44,21 @@ const roles = [
 
 const init = async () => {
   const { action } = await inquirer.prompt(furtherActionQuestion);
-  console.log(action);
+  generateAction(action);
   console.log('Successfully created your employee list!');
+};
+
+const generateAction = async (action) => {
+  if (action === 'View All Departments') {
+    ViewDepartments();
+    init();
+  } else if (action === 'View All Roles') {
+    ViewRoles();
+    init();
+  } else if (action === 'View All Employees') {
+    ViewEmployees();
+    init();
+  }
 };
 
 init();
