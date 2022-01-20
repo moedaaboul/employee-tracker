@@ -33,13 +33,21 @@ const roles = [
   'Customer Service',
 ];
 
-ViewDepartments();
-ViewEmployees();
-ViewRoles();
-addDepartment('Capital Markets');
-addRole('Lawyer', 3, 80000);
-addEmployee('John', 'Doe', 1, 1);
-updateEmployeeRole(2, 'John', 'Doe');
-ViewEmployees();
+// ViewDepartments();
+// ViewEmployees();
+// ViewRoles();
+// addDepartment('Capital Markets');
+// addRole('Lawyer', 3, 80000);
+// addEmployee('John', 'Doe', 1, 1);
+// updateEmployeeRole(2, 'John', 'Doe');
+// ViewEmployees();
+
+const init = async () => {
+  const { action } = await inquirer.prompt(furtherActionQuestion);
+  console.log(action);
+  console.log('Successfully created your employee list!');
+};
+
+init();
 
 module.exports = { managers, departments, roles };
