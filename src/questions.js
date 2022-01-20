@@ -1,17 +1,7 @@
 // should require managers
-let managers = [];
-const departments = ['Engineering', 'Finance', 'Legal', 'Sales', 'Service'];
-const roles = [
-  'Sales Lead',
-  'Salesperson',
-  'Lead Engineer',
-  'Software Engineer',
-  'Account Manager',
-  'Accountant',
-  'Legal Team Lead',
-  'Lawyer',
-  'Customer Service',
-];
+const { departments, roles } = require('../index');
+let { managers } = require('../index');
+const isRequired = require('./validate');
 
 const addEmployeeQuestions = [
   {
@@ -36,7 +26,7 @@ const addEmployeeQuestions = [
     type: 'input',
     message: `Who is the employee's manager?`,
     name: 'manager',
-    choices: ['None', ...managers],
+    choices: managers,
   },
 ];
 
