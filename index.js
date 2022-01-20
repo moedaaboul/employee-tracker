@@ -63,3 +63,15 @@ const addEmployee = (first_name, last_name, role_id, manager_id) => {
 addDepartment('Capital Markets');
 addRole('Lawyer', 3, 80000);
 addEmployee('John', 'Doe', 1, 1);
+
+const updateEmployeeRole = (role_id, first_name, last_name) => {
+  let str =
+    'UPDATE employee SET role_id = ? WHERE first_name = ? AND last_name = ?';
+  return connection.query(str, [role_id, first_name, last_name], (err) => {
+    if (err) throw err;
+  });
+};
+
+updateEmployeeRole(2, 'John', 'Doe');
+
+ViewEmployees();

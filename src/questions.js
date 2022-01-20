@@ -64,7 +64,7 @@ const addRoleQuestions = [
 const updateEmployeeRoleQuestions = [
   {
     type: 'list',
-    message: `Which employee's role do you want to update`,
+    message: `Which employee's role do you want to update?`,
     name: 'role',
     choices: managers,
   },
