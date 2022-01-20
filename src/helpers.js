@@ -12,7 +12,11 @@ const ViewDepartments = () => {
 
 // View all employees
 const ViewEmployees = () => {
-  let str = 'SELECT * FROM employee';
+  let str = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name as department, role.salary, CONCAT(e2.first_name, ' ', e2.last_name) AS Manager
+  FROM employee 
+  JOIN role ON employee.role_id = role.id
+  JOIN department ON department.id = role.department_id
+  LEFT JOIN employee e2 ON employee.manager_id = e2.id`;
   return connection.query(str, (err, results) => {
     if (err) throw err;
     console.table(results); // results contains rows returned by server
@@ -21,7 +25,9 @@ const ViewEmployees = () => {
 
 // View all roles
 const ViewRoles = () => {
-  let str = 'SELECT * FROM role';
+  let str = `SELECT role.id, role.title, department.name as department, role.salary  
+    FROM role 
+    JOIN department ON role.department_id = department.id;`;
   return connection.query(str, (err, results) => {
     if (err) throw err;
     console.table(results); // results contains rows returned by server
