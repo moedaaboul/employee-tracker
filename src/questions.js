@@ -1,7 +1,21 @@
 // should require managers
-const { departments, roles } = require('../index');
-let { managers } = require('../index');
+// const { managers, departments, roles } = require('../index');
 const isRequired = require('./validate');
+
+let employees = ['John Doe', 'Ali Daaboul'];
+let managers = ['none', 'Json'];
+const departments = ['Engineering', 'Finance', 'Legal', 'Sales', 'Service'];
+const roles = [
+  'Sales Lead',
+  'Salesperson',
+  'Lead Engineer',
+  'Software Engineer',
+  'Account Manager',
+  'Accountant',
+  'Legal Team Lead',
+  'Lawyer',
+  'Customer Service',
+];
 
 const addEmployeeQuestions = [
   {
@@ -12,18 +26,18 @@ const addEmployeeQuestions = [
   },
   {
     type: 'input',
-    message: 'What is the salary of the role?',
+    message: `What is the employee's last name?`,
     name: 'lastName',
     validate: isRequired,
   },
   {
-    type: 'input',
+    type: 'list',
     message: `What is the employee's role?`,
     name: 'role',
     choices: roles,
   },
   {
-    type: 'input',
+    type: 'list',
     message: `Who is the employee's manager?`,
     name: 'manager',
     choices: managers,
@@ -55,8 +69,8 @@ const updateEmployeeRoleQuestions = [
   {
     type: 'list',
     message: `Which employee's role do you want to update?`,
-    name: 'role',
-    choices: managers,
+    name: 'fullName',
+    choices: employees,
   },
   {
     type: 'list',

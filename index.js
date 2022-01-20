@@ -19,19 +19,19 @@ const {
   updateEmployeeRole,
 } = require('./src/helpers');
 
-let managers = ['none'];
-const departments = ['Engineering', 'Finance', 'Legal', 'Sales', 'Service'];
-const roles = [
-  'Sales Lead',
-  'Salesperson',
-  'Lead Engineer',
-  'Software Engineer',
-  'Account Manager',
-  'Accountant',
-  'Legal Team Lead',
-  'Lawyer',
-  'Customer Service',
-];
+// let managers = ['none', 'Json'];
+// const departments = ['Engineering', 'Finance', 'Legal', 'Sales', 'Service'];
+// const roles = [
+//   'Sales Lead',
+//   'Salesperson',
+//   'Lead Engineer',
+//   'Software Engineer',
+//   'Account Manager',
+//   'Accountant',
+//   'Legal Team Lead',
+//   'Lawyer',
+//   'Customer Service',
+// ];
 
 // ViewDepartments();
 // ViewEmployees();
@@ -58,9 +58,40 @@ const generateAction = async (action) => {
   } else if (action === 'View All Employees') {
     ViewEmployees();
     init();
+  } else if (action === 'Add Department') {
+    const { name } = await inquirer.prompt(addDepartmentQuestion);
+    addDepartment(name);
+    init();
+  } else if (action === 'Add Role') {
+    const { name, department, salary } = await inquirer.prompt(
+      addRoleQuestions
+    );
+    // need to convert department to department_id
+    addRole(name, 2, salary);
+    init();
+  } else if (action === 'Add Employee') {
+    const { firstName, lastName, role, manager } = await inquirer.prompt(
+      addEmployeeQuestions
+    );
+    // need to convert department to department_id
+    addEmployee(firstName, lastName, 1, 1);
+    init();
+  } else if (action === 'Quit') {
+    process.exit(0);
+  } else if (action === 'Update Employee Role') {
+    const { fullName, assignTo } = await inquirer.prompt(
+      updateEmployeeRoleQuestions
+    );
+
+    const first_name = fullName.split(' ')[0];
+    const last_name = fullName.split(' ')[1];
+    console.log(first_name, last_name);
+    // need to convert department to department_id
+    updateEmployeeRole(3, first_name, last_name);
+    init();
   }
 };
 
 init();
 
-module.exports = { managers, departments, roles };
+// module.exports = { managers, departments, roles };
