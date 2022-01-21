@@ -88,6 +88,7 @@ const furtherActionQuestion = [
       'Add Department',
       'Quit',
       'View All Employees',
+      'View Utilised Budget',
     ],
   },
 ];

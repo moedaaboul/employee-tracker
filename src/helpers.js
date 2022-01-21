@@ -64,10 +64,25 @@ const updateEmployeeRole = (role_id, first_name, last_name) => {
   });
 };
 
+// view utilised budget
+const viewBudget = () => {
+  let str = `SELECT d.name as department, SUM(r.salary) as utitlized_budget
+  FROM employee as e
+  JOIN role as r ON e.role_id = r.id
+  JOIN department as d ON d.id = r.department_id
+  LEFT JOIN employee as e2 ON e.manager_id = e2.id
+  GROUP BY department;`;
+  connection.query(str, (err, results) => {
+    if (err) throw err;
+    console.table(results); // results contains rows returned by server
+  });
+};
+
 module.exports = {
   ViewDepartments,
   ViewEmployees,
   ViewRoles,
+  viewBudget,
   addRole,
   addEmployee,
   addDepartment,

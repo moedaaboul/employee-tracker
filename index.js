@@ -13,6 +13,7 @@ const {
   ViewDepartments,
   ViewEmployees,
   ViewRoles,
+  viewBudget,
   addRole,
   addEmployee,
   addDepartment,
@@ -58,6 +59,9 @@ const generateAction = async (action) => {
     init();
   } else if (action === 'View All Employees') {
     ViewEmployees();
+    init();
+  } else if (action === 'View Utilised Budget') {
+    viewBudget();
     init();
   } else if (action === 'Add Department') {
     const { name } = await inquirer.prompt(addDepartmentQuestion);
