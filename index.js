@@ -42,10 +42,14 @@ const {
 // updateEmployeeRole(2, 'John', 'Doe');
 // ViewEmployees();
 
+let departments = [];
+let getDepartmentsResults;
+
 const init = async () => {
-  const query = `SELECT * FROM department_db.department;`;
-  const result = await promiseQuery(query); // use in async function
-  const departments = result.map((e) => e.name);
+  const getDepartmentsQuery = `SELECT * FROM department_db.department;`;
+  getDepartmentsResults = await promiseQuery(getDepartmentsQuery); // use in async function
+  console.log(getDepartmentsResults);
+  departments = getDepartmentsResults.map((e) => e.name);
   console.log(departments);
   const { action } = await inquirer.prompt(furtherActionQuestion);
   await generateAction(action);
@@ -68,10 +72,14 @@ const generateAction = async (action) => {
     init();
   } else if (action === 'Add Role') {
     const { name, department, salary } = await inquirer.prompt(
-      addRoleQuestions
+      addRoleQuestions(departments)
     );
+    console.log(getDepartmentsResults);
+    console.log(department);
+    const [{ id }] = getDepartmentsResults.filter((e) => e.name === department);
+    console.log(id);
     // need to convert department to department_id
-    addRole(name, 2, salary);
+    addRole(name, id, salary);
     init();
   } else if (action === 'Add Employee') {
     const { firstName, lastName, role, manager } = await inquirer.prompt(

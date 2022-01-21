@@ -4,7 +4,7 @@ const isRequired = require('./validate');
 
 let employees = ['John Doe', 'Ali Daaboul'];
 let managers = ['none', 'Json'];
-const departments = ['Engineering', 'Finance', 'Legal', 'Sales', 'Service'];
+
 const roles = [
   'Sales Lead',
   'Salesperson',
@@ -44,7 +44,7 @@ const addEmployeeQuestions = [
   },
 ];
 
-const addRoleQuestions = [
+const addRoleQuestions = (departments) => [
   {
     type: 'input',
     message: 'What is the name of the role?',
@@ -58,7 +58,7 @@ const addRoleQuestions = [
     validate: isRequired,
   },
   {
-    type: 'input',
+    type: 'list',
     message: 'Which department does the role belong to?',
     name: 'department',
     choices: departments,
