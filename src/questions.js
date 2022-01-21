@@ -2,22 +2,7 @@
 // const { managers, departments, roles } = require('../index');
 const isRequired = require('./validate');
 
-let employees = ['John Doe', 'Ali Daaboul'];
-let managers = ['none', 'Json'];
-
-const roles = [
-  'Sales Lead',
-  'Salesperson',
-  'Lead Engineer',
-  'Software Engineer',
-  'Account Manager',
-  'Accountant',
-  'Legal Team Lead',
-  'Lawyer',
-  'Customer Service',
-];
-
-const addEmployeeQuestions = [
+const addEmployeeQuestions = (roles, managers) => [
   {
     type: 'input',
     message: `What is the employee's first name?`,
@@ -65,7 +50,7 @@ const addRoleQuestions = (departments) => [
   },
 ];
 
-const updateEmployeeRoleQuestions = [
+const updateEmployeeRoleQuestions = (employees, roles) => [
   {
     type: 'list',
     message: `Which employee's role do you want to update?`,
