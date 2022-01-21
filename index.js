@@ -18,7 +18,6 @@ const {
   addDepartment,
   updateEmployeeRole,
 } = require('./src/helpers');
-const { registerPrompt } = require('inquirer');
 
 // ViewDepartments();
 // ViewEmployees();
@@ -38,24 +37,16 @@ let getEmployeesResults;
 
 const init = async () => {
   const getDepartmentsQuery = `SELECT * FROM department_db.department;`;
-  getDepartmentsResults = await promiseQuery(getDepartmentsQuery); // use in async function
-  // console.log(getDepartmentsResults);
+  getDepartmentsResults = await promiseQuery(getDepartmentsQuery);
   departments = getDepartmentsResults.map((e) => e.name);
-  // console.log(departments);
   const getRolesQuery = `SELECT * FROM department_db.role;`;
-  getRolesResults = await promiseQuery(getRolesQuery); // use in async function
-  // console.log(getRolesResults);
+  getRolesResults = await promiseQuery(getRolesQuery);
   roles = getRolesResults.map((e) => e.title);
-  // console.log(roles);
   const getEmployeesQuery = `SELECT id, CONCAT(first_name, ' ', last_name) AS full_name FROM department_db.employee;`;
-  getEmployeesResults = await promiseQuery(getEmployeesQuery); // use in async function
-  // console.log(getEmployeesResults);
+  getEmployeesResults = await promiseQuery(getEmployeesQuery);
   employees = getEmployeesResults.map((e) => e.full_name);
-  // console.log(employees);
-
   const { action } = await inquirer.prompt(furtherActionQuestion);
   await generateAction(action);
-  console.log('Successfully created your employee list!');
 };
 
 const generateAction = async (action) => {
@@ -71,31 +62,26 @@ const generateAction = async (action) => {
   } else if (action === 'Add Department') {
     const { name } = await inquirer.prompt(addDepartmentQuestion);
     addDepartment(name);
+    console.log(`Added ${name} to the database`);
     init();
   } else if (action === 'Add Role') {
     const { name, department, salary } = await inquirer.prompt(
       addRoleQuestions(departments)
     );
-    // console.log(getDepartmentsResults);
-    // console.log(department);
     const [{ id }] = getDepartmentsResults.filter((e) => e.name === department);
-    // console.log(id);
-    // need to convert department to department_id
     addRole(name, id, salary);
+    console.log(`Added ${name} to the database`);
     init();
   } else if (action === 'Add Employee') {
     const { firstName, lastName, role, manager } = await inquirer.prompt(
       addEmployeeQuestions(roles, employees)
     );
-    // console.log(firstName, lastName, role, manager);
     const [{ id: role_id }] = getRolesResults.filter((e) => e.title === role);
-    // console.log(role_id);
     const [{ id: manager_id }] = getEmployeesResults.filter(
       (e) => e.full_name === manager
     );
-    // console.log(manager_id);
-    // need to convert department to department_id
     addEmployee(firstName, lastName, role_id, manager_id);
+    console.log(`Added ${firstName} ${lastName} to the database`);
     init();
   } else if (action === 'Quit') {
     process.exit(0);
@@ -103,19 +89,15 @@ const generateAction = async (action) => {
     const { fullName, assignTo } = await inquirer.prompt(
       updateEmployeeRoleQuestions(employees, roles)
     );
-    // console.log(fullName, assignTo, getEmployeesResults);
     const [{ id: role_id }] = getRolesResults.filter(
       (e) => e.title === assignTo
     );
     const first_name = fullName.split(' ')[0];
     const last_name = fullName.split(' ')[1];
-    // console.log(first_name, last_name);
-    // need to convert department to department_id
     updateEmployeeRole(role_id, first_name, last_name);
+    console.log(`Updated employee's role`);
     init();
   }
 };
 
 init();
-
-// module.exports = { managers, departments, roles };
