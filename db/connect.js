@@ -1,5 +1,6 @@
 require('dotenv').config();
 const mysql = require('mysql2');
+const { promisify } = require('util');
 
 // create the connection to database
 const connection = mysql.createConnection({
@@ -10,4 +11,6 @@ const connection = mysql.createConnection({
   multipleStatements: true,
 });
 
-module.exports = connection;
+const promiseQuery = promisify(connection.query).bind(connection);
+
+module.exports = { connection, promiseQuery };

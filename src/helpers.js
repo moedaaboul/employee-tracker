@@ -1,4 +1,4 @@
-const connection = require('../db/connect');
+const { connection, promiseQuery } = require('../db/connect');
 const cTable = require('console.table');
 
 // View all departments

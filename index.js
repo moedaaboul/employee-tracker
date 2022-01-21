@@ -1,4 +1,4 @@
-const connection = require('./db/connect');
+const { connection, promiseQuery } = require('./db/connect');
 const cTable = require('console.table');
 const inquirer = require('inquirer');
 const {
@@ -43,8 +43,12 @@ const {
 // ViewEmployees();
 
 const init = async () => {
+  const query = `SELECT * FROM department_db.department;`;
+  const result = await promiseQuery(query); // use in async function
+  const departments = result.map((e) => e.name);
+  console.log(departments);
   const { action } = await inquirer.prompt(furtherActionQuestion);
-  generateAction(action);
+  await generateAction(action);
   console.log('Successfully created your employee list!');
 };
 
