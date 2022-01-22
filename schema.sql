@@ -18,7 +18,8 @@ CREATE TABLE role (
 
 ALTER TABLE role
 ADD FOREIGN KEY (department_id)
-REFERENCES department (id);
+REFERENCES department (id)
+ON DELETE CASCADE;
 
 CREATE TABLE employee (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

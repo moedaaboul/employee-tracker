@@ -74,6 +74,15 @@ const addDepartmentQuestion = [
   },
 ];
 
+const deleteDepartmentQuestion = (departments) => [
+  {
+    type: 'list',
+    message: 'Which department do you want to delete?',
+    name: 'department',
+    choices: departments,
+  },
+];
+
 const furtherActionQuestion = [
   {
     type: 'list',
@@ -89,6 +98,7 @@ const furtherActionQuestion = [
       'Quit',
       'View All Employees',
       'View Utilised Budget',
+      'Delete Department',
     ],
   },
 ];
@@ -99,4 +109,5 @@ module.exports = {
   addDepartmentQuestion,
   furtherActionQuestion,
   updateEmployeeRoleQuestions,
+  deleteDepartmentQuestion,
 };

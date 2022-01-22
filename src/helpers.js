@@ -78,6 +78,13 @@ const viewBudget = () => {
   });
 };
 
+const deleteDepartment = (name) => {
+  let str = 'DELETE FROM department WHERE name = ?';
+  connection.query(str, name, (err) => {
+    if (err) throw err;
+  });
+};
+
 module.exports = {
   ViewDepartments,
   ViewEmployees,
@@ -87,4 +94,5 @@ module.exports = {
   addEmployee,
   addDepartment,
   updateEmployeeRole,
+  deleteDepartment,
 };
