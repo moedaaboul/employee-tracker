@@ -8,6 +8,8 @@ const {
   furtherActionQuestion,
   updateEmployeeRoleQuestions,
   deleteDepartmentQuestion,
+  deleteRoleQuestion,
+  deleteEmployeeQuestion,
   viewEmployeesbyManagerQuestion,
   viewEmployeesbyDepartmentQuestion,
 } = require('./src/questions');
@@ -22,6 +24,8 @@ const {
   addDepartment,
   updateEmployeeRole,
   deleteDepartment,
+  deleteEmployee,
+  deleteRole,
   viewEmployeesbyManager,
   viewEmployeesbyDepartment,
 } = require('./src/helpers');
@@ -92,6 +96,18 @@ const generateAction = async (action) => {
     );
     deleteDepartment(department);
     console.log(`Deleted ${department} from the database`);
+    init();
+  } else if (action === 'Delete Employee') {
+    const { employee } = await inquirer.prompt(
+      deleteEmployeeQuestion(employees)
+    );
+    deleteEmployee(employee);
+    console.log(`Deleted ${employee} from the database`);
+    init();
+  } else if (action === 'Delete Role') {
+    const { role } = await inquirer.prompt(deleteRoleQuestion(roles));
+    deleteRole(role);
+    console.log(`Deleted ${role} from the database`);
     init();
   } else if (action === 'Add Role') {
     const { name, department, salary } = await inquirer.prompt(

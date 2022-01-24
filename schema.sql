@@ -28,3 +28,8 @@ CREATE TABLE employee (
   role_id INT NOT NULL,
   manager_id INT
 );
+
+ALTER TABLE employee
+ADD FOREIGN KEY (manager_id)
+REFERENCES employee (id)
+ON DELETE SET NULL;

@@ -117,6 +117,20 @@ const deleteDepartment = (name) => {
   });
 };
 
+const deleteEmployee = (employee) => {
+  let str = `DELETE FROM employee WHERE CONCAT(first_name, ' ', last_name) = ?`;
+  connection.query(str, employee, (err) => {
+    if (err) throw err;
+  });
+};
+
+const deleteRole = (title) => {
+  let str = 'DELETE FROM role WHERE title = ?';
+  connection.query(str, title, (err) => {
+    if (err) throw err;
+  });
+};
+
 module.exports = {
   ViewDepartments,
   ViewEmployees,
@@ -127,6 +141,8 @@ module.exports = {
   addDepartment,
   updateEmployeeRole,
   deleteDepartment,
+  deleteEmployee,
+  deleteRole,
   viewEmployeesbyManager,
   viewEmployeesbyDepartment,
 };
