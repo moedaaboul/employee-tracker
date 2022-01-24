@@ -65,6 +65,21 @@ const updateEmployeeRoleQuestions = (employees, roles) => [
   },
 ];
 
+const updateEmployeeManagerQuestions = (employees, managers) => [
+  {
+    type: 'list',
+    message: `Which employee do you want to update?`,
+    name: 'employee',
+    choices: employees,
+  },
+  {
+    type: 'list',
+    message: 'Which manager do you want to assign this employee?',
+    name: 'manager',
+    choices: managers,
+  },
+];
+
 const addDepartmentQuestion = [
   {
     type: 'input',
@@ -127,6 +142,7 @@ const furtherActionQuestion = [
     choices: [
       'Add Employee',
       'Update Employee Role',
+      'Update Employee Manager',
       'View All Roles',
       'Add Role',
       'View All Departments',
@@ -154,4 +170,5 @@ module.exports = {
   deleteEmployeeQuestion,
   viewEmployeesbyManagerQuestion,
   viewEmployeesbyDepartmentQuestion,
+  updateEmployeeManagerQuestions,
 };

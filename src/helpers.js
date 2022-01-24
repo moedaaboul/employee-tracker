@@ -96,6 +96,13 @@ const updateEmployeeRole = (role_id, first_name, last_name) => {
   });
 };
 
+const updateEmployeeManager = (manager_id, employee) => {
+  let str = `UPDATE employee SET manager_id = ? WHERE CONCAT(first_name,' ',last_name) = ?`;
+  connection.query(str, [manager_id, employee], (err) => {
+    if (err) throw err;
+  });
+};
+
 // view utilised budget
 const viewBudget = () => {
   let str = `SELECT d.name as department, SUM(r.salary) as utitlized_budget
@@ -140,6 +147,7 @@ module.exports = {
   addEmployee,
   addDepartment,
   updateEmployeeRole,
+  updateEmployeeManager,
   deleteDepartment,
   deleteEmployee,
   deleteRole,

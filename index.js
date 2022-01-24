@@ -7,6 +7,7 @@ const {
   addDepartmentQuestion,
   furtherActionQuestion,
   updateEmployeeRoleQuestions,
+  updateEmployeeManagerQuestions,
   deleteDepartmentQuestion,
   deleteRoleQuestion,
   deleteEmployeeQuestion,
@@ -23,6 +24,7 @@ const {
   addEmployee,
   addDepartment,
   updateEmployeeRole,
+  updateEmployeeManager,
   deleteDepartment,
   deleteEmployee,
   deleteRole,
@@ -141,6 +143,17 @@ const generateAction = async (action) => {
     const last_name = fullName.split(' ')[1];
     updateEmployeeRole(role_id, first_name, last_name);
     console.log(`Updated employee's role`);
+    init();
+  } else if (action === 'Update Employee Manager') {
+    // need to split this prompt to filter employee from manager list
+    const { employee, manager } = await inquirer.prompt(
+      updateEmployeeManagerQuestions(employees, employees)
+    );
+    const [{ id: manager_id }] = getEmployeesResults.filter(
+      (e) => e.full_name === manager
+    );
+    updateEmployeeManager(manager_id, employee);
+    console.log(`Updated manager`);
     init();
   }
 };
