@@ -14,8 +14,8 @@ const viewDepartments = () => {
 const viewEmployees = () => {
   let str = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name as department, role.salary, CONCAT(e2.first_name, ' ', e2.last_name) AS Manager
   FROM employee 
-  JOIN role ON employee.role_id = role.id
-  JOIN department ON department.id = role.department_id
+  LEFT JOIN role ON employee.role_id = role.id
+  LEFT JOIN department ON department.id = role.department_id
   LEFT JOIN employee e2 ON employee.manager_id = e2.id`;
   connection.query(str, (err, results) => {
     if (err) throw err;
@@ -26,8 +26,8 @@ const viewEmployees = () => {
 const viewEmployeesbyManager = (name) => {
   let str = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name as department, role.salary, CONCAT(e2.first_name, ' ', e2.last_name) AS Manager
   FROM employee 
-  JOIN role ON employee.role_id = role.id
-  JOIN department ON department.id = role.department_id
+  LEFT JOIN role ON employee.role_id = role.id
+  LEFT JOIN department ON department.id = role.department_id
   LEFT JOIN employee e2 ON employee.manager_id = e2.id
   WHERE CONCAT(e2.first_name, ' ', e2.last_name)  = ?;`;
   connection.query(str, name, (err, results) => {
@@ -42,8 +42,8 @@ const viewEmployeesbyManager = (name) => {
 const viewEmployeesbyDepartment = (department) => {
   let str = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name as department, role.salary, CONCAT(e2.first_name, ' ', e2.last_name) AS Manager
   FROM employee 
-  JOIN role ON employee.role_id = role.id
-  JOIN department ON department.id = role.department_id
+  LEFT JOIN role ON employee.role_id = role.id
+  LEFT JOIN department ON department.id = role.department_id
   LEFT JOIN employee e2 ON employee.manager_id = e2.id
   WHERE department.name  = ?;`;
   connection.query(str, department, (err, results) => {
@@ -70,8 +70,8 @@ const viewRoles = () => {
 const viewBudget = () => {
   let str = `SELECT d.name as department, SUM(r.salary) as utitlized_budget
   FROM employee as e
-  JOIN role as r ON e.role_id = r.id
-  JOIN department as d ON d.id = r.department_id
+  LEFT JOIN role as r ON e.role_id = r.id
+  LEFT JOIN department as d ON d.id = r.department_id
   LEFT JOIN employee as e2 ON e.manager_id = e2.id
   GROUP BY department;`;
   connection.query(str, (err, results) => {
