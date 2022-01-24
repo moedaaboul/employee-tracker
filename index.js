@@ -8,6 +8,8 @@ const {
   furtherActionQuestion,
   updateEmployeeRoleQuestions,
   deleteDepartmentQuestion,
+  viewEmployeesbyManagerQuestion,
+  viewEmployeesbyDepartmentQuestion,
 } = require('./src/questions');
 
 const {
@@ -20,6 +22,8 @@ const {
   addDepartment,
   updateEmployeeRole,
   deleteDepartment,
+  viewEmployeesbyManager,
+  viewEmployeesbyDepartment,
 } = require('./src/helpers');
 
 // ViewDepartments();
@@ -64,6 +68,18 @@ const generateAction = async (action) => {
     init();
   } else if (action === 'View Utilised Budget') {
     viewBudget();
+    init();
+  } else if (action === 'View employees by manager') {
+    const { manager } = await inquirer.prompt(
+      viewEmployeesbyManagerQuestion(employees)
+    );
+    viewEmployeesbyManager(manager);
+    init();
+  } else if (action === 'View employees by department') {
+    const { department } = await inquirer.prompt(
+      viewEmployeesbyDepartmentQuestion(departments)
+    );
+    viewEmployeesbyDepartment(department);
     init();
   } else if (action === 'Add Department') {
     const { name } = await inquirer.prompt(addDepartmentQuestion);

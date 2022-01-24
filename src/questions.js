@@ -83,6 +83,24 @@ const deleteDepartmentQuestion = (departments) => [
   },
 ];
 
+const viewEmployeesbyManagerQuestion = (managers) => [
+  {
+    type: 'list',
+    message: 'Select Manager to view employees by this Manager?',
+    name: 'manager',
+    choices: managers,
+  },
+];
+
+const viewEmployeesbyDepartmentQuestion = (departments) => [
+  {
+    type: 'list',
+    message: 'Select Department to view employees for?',
+    name: 'department',
+    choices: departments,
+  },
+];
+
 const furtherActionQuestion = [
   {
     type: 'list',
@@ -99,6 +117,8 @@ const furtherActionQuestion = [
       'View All Employees',
       'View Utilised Budget',
       'Delete Department',
+      'View employees by manager',
+      'View employees by department',
     ],
   },
 ];
@@ -110,4 +130,6 @@ module.exports = {
   furtherActionQuestion,
   updateEmployeeRoleQuestions,
   deleteDepartmentQuestion,
+  viewEmployeesbyManagerQuestion,
+  viewEmployeesbyDepartmentQuestion,
 };
