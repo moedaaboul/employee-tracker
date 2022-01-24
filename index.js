@@ -2,34 +2,34 @@ const { connection, promiseQuery } = require('./db/connect');
 const cTable = require('console.table');
 const inquirer = require('inquirer');
 const {
-  addEmployeeQuestions,
   addRoleQuestions,
+  addEmployeeQuestions,
   addDepartmentQuestion,
-  furtherActionQuestion,
-  updateEmployeeRoleQuestions,
-  updateEmployeeManagerQuestions,
-  deleteDepartmentQuestion,
-  deleteRoleQuestion,
-  deleteEmployeeQuestion,
   viewEmployeesbyManagerQuestion,
   viewEmployeesbyDepartmentQuestion,
+  updateEmployeeRoleQuestions,
+  updateEmployeeManagerQuestions,
+  deleteRoleQuestion,
+  deleteEmployeeQuestion,
+  deleteDepartmentQuestion,
+  furtherActionQuestion,
 } = require('./src/questions');
 
 const {
-  ViewDepartments,
-  ViewEmployees,
-  ViewRoles,
-  viewBudget,
   addRole,
   addEmployee,
   addDepartment,
+  viewDepartments,
+  viewEmployees,
+  viewRoles,
+  viewBudget,
+  viewEmployeesbyManager,
+  viewEmployeesbyDepartment,
   updateEmployeeRole,
   updateEmployeeManager,
   deleteDepartment,
   deleteEmployee,
   deleteRole,
-  viewEmployeesbyManager,
-  viewEmployeesbyDepartment,
 } = require('./src/helpers');
 
 // ViewDepartments();
@@ -50,13 +50,13 @@ let getEmployeesResults;
 
 const init = async () => {
   const getDepartmentsQuery = `SELECT * FROM department_db.department;`;
-  getDepartmentsResults = await promiseQuery(getDepartmentsQuery);
-  departments = getDepartmentsResults.map((e) => e.name);
   const getRolesQuery = `SELECT * FROM department_db.role;`;
-  getRolesResults = await promiseQuery(getRolesQuery);
-  roles = getRolesResults.map((e) => e.title);
   const getEmployeesQuery = `SELECT id, CONCAT(first_name, ' ', last_name) AS full_name FROM department_db.employee;`;
+  getDepartmentsResults = await promiseQuery(getDepartmentsQuery);
+  getRolesResults = await promiseQuery(getRolesQuery);
   getEmployeesResults = await promiseQuery(getEmployeesQuery);
+  departments = getDepartmentsResults.map((e) => e.name);
+  roles = getRolesResults.map((e) => e.title);
   employees = getEmployeesResults.map((e) => e.full_name);
   const { action } = await inquirer.prompt(furtherActionQuestion);
   await generateAction(action);
@@ -64,13 +64,13 @@ const init = async () => {
 
 const generateAction = async (action) => {
   if (action === 'View All Departments') {
-    ViewDepartments();
+    viewDepartments();
     init();
   } else if (action === 'View All Roles') {
-    ViewRoles();
+    viewRoles();
     init();
   } else if (action === 'View All Employees') {
-    ViewEmployees();
+    viewEmployees();
     init();
   } else if (action === 'View Utilised Budget') {
     viewBudget();
@@ -146,6 +146,11 @@ const generateAction = async (action) => {
     init();
   } else if (action === 'Update Employee Manager') {
     // need to split this prompt to filter employee from manager list
+    // or validator
+    // moves schema and seeds to db folder
+    // create CREATE READ UPDATE DELETE folders to modularise file
+    // CHALK
+    // ADD TEST
     const { employee, manager } = await inquirer.prompt(
       updateEmployeeManagerQuestions(employees, employees)
     );
