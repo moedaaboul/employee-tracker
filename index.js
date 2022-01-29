@@ -60,7 +60,6 @@ const init = async () => {
   employees = getEmployeesResults.map((e) => e.full_name);
   const { action } = await inquirer.prompt(furtherActionQuestion);
   await generateAction(action);
-  console.log(clc.magenta.bgWhite(` Good Bye `), '\n');
 };
 
 const generateAction = async (action) => {
