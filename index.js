@@ -32,15 +32,6 @@ const {
   deleteRole,
 } = require('./src/helpers');
 
-// ViewDepartments();
-// ViewEmployees();
-// ViewRoles();
-// addDepartment('Capital Markets');
-// addRole('Lawyer', 3, 80000);
-// addEmployee('John', 'Doe', 1, 1);
-// updateEmployeeRole(2, 'John', 'Doe');
-// ViewEmployees();
-
 let departments = [];
 let getDepartmentsResults;
 let roles = [];
@@ -139,16 +130,11 @@ const generateAction = async (action) => {
     const [{ id: role_id }] = getRolesResults.filter(
       (e) => e.title === assignTo
     );
-    const first_name = fullName.split(' ')[0];
-    const last_name = fullName.split(' ')[1];
-    updateEmployeeRole(role_id, first_name, last_name);
+    updateEmployeeRole(role_id, fullName);
     console.log(`Updated employee's role`);
     init();
   } else if (action === 'Update Employee Manager') {
     // need to split this prompt to filter employee from manager list
-    // or validator
-    // moves schema and seeds to db folder
-    // create CREATE READ UPDATE DELETE folders to modularise file
     // CHALK
     // ADD TEST
     const { employee, manager } = await inquirer.prompt(
