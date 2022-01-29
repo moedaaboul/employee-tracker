@@ -1,6 +1,7 @@
 const { connection, promiseQuery } = require('./db/connect');
 const cTable = require('console.table');
 const inquirer = require('inquirer');
+var clc = require('cli-color');
 const {
   addDepartmentQuestion,
   addRoleQuestions,
@@ -40,6 +41,13 @@ let getRolesResults;
 let employees = [];
 let getEmployeesResults;
 
+console.log(
+  clc.magenta.bgWhite(
+    ` Welcome to the Employee Management System powered by MySQL `
+  ),
+  '\n'
+);
+
 const init = async () => {
   const getDepartmentsQuery = `SELECT * FROM department_db.department;`;
   const getRolesQuery = `SELECT * FROM department_db.role;`;
@@ -52,6 +60,7 @@ const init = async () => {
   employees = getEmployeesResults.map((e) => e.full_name);
   const { action } = await inquirer.prompt(furtherActionQuestion);
   await generateAction(action);
+  console.log(clc.magenta.bgWhite(` Good Bye `), '\n');
 };
 
 const generateAction = async (action) => {
@@ -82,26 +91,26 @@ const generateAction = async (action) => {
   } else if (action === 'Add Department') {
     const { name } = await inquirer.prompt(addDepartmentQuestion);
     addDepartment(name);
-    console.log(`Added ${name} to the database`);
+    console.log(clc.magenta(`Added ${name} to the database`));
     init();
   } else if (action === 'Delete Department') {
     const { department } = await inquirer.prompt(
       deleteDepartmentQuestion(departments)
     );
     deleteDepartment(department);
-    console.log(`Deleted ${department} from the database`);
+    console.log(clc.magenta(`Deleted ${department} from the database`));
     init();
   } else if (action === 'Delete Employee') {
     const { employee } = await inquirer.prompt(
       deleteEmployeeQuestion(employees)
     );
     deleteEmployee(employee);
-    console.log(`Deleted ${employee} from the database`);
+    console.log(clc.magenta(`Deleted ${employee} from the database`));
     init();
   } else if (action === 'Delete Role') {
     const { role } = await inquirer.prompt(deleteRoleQuestion(roles));
     deleteRole(role);
-    console.log(`Deleted ${role} from the database`);
+    console.log(clc.magenta(`Deleted ${role} from the database`));
     init();
   } else if (action === 'Add Role') {
     const { name, department, salary } = await inquirer.prompt(
@@ -109,7 +118,7 @@ const generateAction = async (action) => {
     );
     const [{ id }] = getDepartmentsResults.filter((e) => e.name === department);
     addRole(name, id, salary);
-    console.log(`Added ${name} to the database`);
+    console.log(clc.magenta(`Added ${name} to the database`));
     init();
   } else if (action === 'Add Employee') {
     const { firstName, lastName, role, manager } = await inquirer.prompt(
@@ -120,7 +129,7 @@ const generateAction = async (action) => {
       (e) => e.full_name === manager
     );
     addEmployee(firstName, lastName, role_id, manager_id);
-    console.log(`Added ${firstName} ${lastName} to the database`);
+    console.log(clc.magenta(`Added ${firstName} ${lastName} to the database`));
     init();
   } else if (action === 'Quit') {
     process.exit(0);
@@ -132,7 +141,9 @@ const generateAction = async (action) => {
       (e) => e.title === assignTo
     );
     updateEmployeeRole(role_id, fullName);
-    console.log(`Updated employee's role`);
+    console.log(
+      clc.magenta(`Updated ${fullName} employee's role to ${assignTo}`)
+    );
     init();
   } else if (action === 'Update Employee Manager') {
     // need to split this prompt to filter employee from manager list
@@ -149,7 +160,7 @@ const generateAction = async (action) => {
       (e) => e.full_name === manager
     );
     updateEmployeeManager(manager_id, employee);
-    console.log(`Updated manager`);
+    console.log(clc.magenta(`Updated ${employee}'s manager to ${manager}`));
     init();
   }
 };

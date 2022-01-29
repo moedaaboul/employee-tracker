@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/moedaaboul/employee-tracker#readme",
   "dependencies": {
+    "cli-color": "^2.0.1",
     "console.table": "^0.10.0",
     "dotenv": "^14.2.0",
     "inquirer": "^8.2.0",
