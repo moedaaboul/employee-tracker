@@ -13,13 +13,16 @@ const updateEmployeeRoleQuestions = (employees, roles) => [
   },
 ];
 
-const updateEmployeeManagerQuestions = (employees, managers) => [
+const updateEmployeeManagerFirstQuestion = (employees) => [
   {
     type: 'list',
     message: `Which employee do you want to update?`,
     name: 'employee',
     choices: employees,
   },
+];
+
+const updateEmployeeManagerSecondQuestion = (managers) => [
   {
     type: 'list',
     message: 'Which manager do you want to assign this employee?',
@@ -30,5 +33,6 @@ const updateEmployeeManagerQuestions = (employees, managers) => [
 
 module.exports = {
   updateEmployeeRoleQuestions,
-  updateEmployeeManagerQuestions,
+  updateEmployeeManagerFirstQuestion,
+  updateEmployeeManagerSecondQuestion,
 };

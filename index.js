@@ -2,16 +2,17 @@ const { connection, promiseQuery } = require('./db/connect');
 const cTable = require('console.table');
 const inquirer = require('inquirer');
 const {
+  addDepartmentQuestion,
   addRoleQuestions,
   addEmployeeQuestions,
-  addDepartmentQuestion,
   viewEmployeesbyManagerQuestion,
   viewEmployeesbyDepartmentQuestion,
   updateEmployeeRoleQuestions,
-  updateEmployeeManagerQuestions,
+  updateEmployeeManagerFirstQuestion,
+  updateEmployeeManagerSecondQuestion,
+  deleteDepartmentQuestion,
   deleteRoleQuestion,
   deleteEmployeeQuestion,
-  deleteDepartmentQuestion,
   furtherActionQuestion,
 } = require('./src/questions');
 
@@ -137,8 +138,12 @@ const generateAction = async (action) => {
     // need to split this prompt to filter employee from manager list
     // CHALK
     // ADD TEST
-    const { employee, manager } = await inquirer.prompt(
-      updateEmployeeManagerQuestions(employees, employees)
+    const { employee } = await inquirer.prompt(
+      updateEmployeeManagerFirstQuestion(employees)
+    );
+    employees = employees.filter((e) => e !== employee);
+    const { manager } = await inquirer.prompt(
+      updateEmployeeManagerSecondQuestion(employees)
     );
     const [{ id: manager_id }] = getEmployeesResults.filter(
       (e) => e.full_name === manager

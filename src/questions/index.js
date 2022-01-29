@@ -9,7 +9,8 @@ const {
 } = require('./read');
 const {
   updateEmployeeRoleQuestions,
-  updateEmployeeManagerQuestions,
+  updateEmployeeManagerFirstQuestion,
+  updateEmployeeManagerSecondQuestion,
 } = require('./update');
 const {
   deleteDepartmentQuestion,
@@ -49,7 +50,8 @@ module.exports = {
   viewEmployeesbyManagerQuestion,
   viewEmployeesbyDepartmentQuestion,
   updateEmployeeRoleQuestions,
-  updateEmployeeManagerQuestions,
+  updateEmployeeManagerFirstQuestion,
+  updateEmployeeManagerSecondQuestion,
   deleteDepartmentQuestion,
   deleteRoleQuestion,
   deleteEmployeeQuestion,
