@@ -37,9 +37,9 @@ Login to mysql using the terminal using and the follow with your password:
 The db schema and seeds will be added using the following:
 
 ```mysql
-    source .db/schema.sql
+source .db/schema.sql
 
-    source .db/seeds.sql
+source .db/seeds.sql
 ```
 
 The application will then be invoked by using the following command:
