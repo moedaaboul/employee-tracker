@@ -79,6 +79,7 @@ The application will then be invoked by using the following command:
 
 - Nodejs must be installed
 - MySQL must be installed
+- MySQL Workbench (a MySQL GUI - highly recommended)
 - Text editor (VS Code recommended)
 
 ## Demo
