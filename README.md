@@ -15,9 +15,7 @@ The command-line application from scratch to manage a company's employee databas
 - [Usage](#usage)
 - [Directory Structure](#directory-structure)
 - [Technologies Used](#technologies-used)
-- [Tests](#tests)
-- [Features](#features)
-- [Appearance](#appearance)
+- [Schema](#schema)
 - [Setup](#setup)
 - [Demo](#demo)
 - [Acknowledgements](#acknowledgements)
@@ -32,7 +30,19 @@ The command-line application from scratch to manage a company's employee databas
 
 ## Usage
 
-The application will be invoked by using the following command:
+Login to mysql using the terminal using and the follow with your password:
+
+    mysql -u root -p
+
+The db schema and seeds will be added using the following:
+
+```mysql
+    source /schema.sql
+
+    source /seeds.sql
+```
+
+The application will then be invoked by using the following command:
 
     node index.js
 
@@ -40,36 +50,28 @@ The application will be invoked by using the following command:
 
 ```md
 .
-├── **tests**/
-│ ├── XXX.test.js
-│ ├── XXX.test.js
-│ ├── XXX.test.js
-│ └── XXX.test.js
 ├── assets/
-├── lib/
+├── db/
 ├── src/
+│ ├── helpers/
+│ └── questions/
 ├── .gitignore
 ├── index.js
-└── package.json
+├── package.json
+└── README.md
 ```
 
 ## Technologies Used
 
-- Node.js
 - MySQL
-- Inquirer
-- JavaScript
-- Jest
+- Node.js
+- mysql2
+- inquirer
+- dotenv
+- cli-color
+- console.table
 
-## Tests
-
-Run test using:
-
-    npm run test
-
-## Features
-
-## Appearance
+## Schema
 
 ![Schema](./assets/schema-image.png)
 
@@ -81,13 +83,15 @@ Run test using:
 
 ## Demo
 
-[![Watch the video](./assets/my-video-player.png)](https://drive.google.com/file/d/1KAaGDYgHObkcrLzAKw4rKIMEY04-3JRm/view)
+[![Watch the video](./assets/my-video-player.png)](https://drive.google.com/file/d/1RoJ_t8hFmkak7h2BDBvQsZf7Kkvo2wDw/view)
 
 ## Acknowledgements
 
-- https://www.npmjs.com/package/jest
+- https://www.npmjs.com/package/dotenv
 - https://www.npmjs.com/package/mysql2
 - https://www.npmjs.com/package/inquirer
+- https://www.npmjs.com/package/cli-color
+- https://www.npmjs.com/package/console.table
 
 ## Questions
 
