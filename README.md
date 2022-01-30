@@ -4,9 +4,9 @@
 
 ## Description
 
-A Node.js command-line application that allows non-developers to easily view and interact with information stored in databases. These interfaces is also referred to as a **content management systems (CMS)**.
+A Node.js command-line application that allows non-developers to easily view and interact with information stored in databases. This interface is an example of a **content management systems (CMS)**.
 
-The command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
+The task was to develop this command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
 ## Table of Contents
 
@@ -37,14 +37,14 @@ Login to mysql using the terminal using and the follow with your password:
 The db schema and seeds will be added using the following:
 
 ```mysql
-    source /schema.sql
+    source .db/schema.sql
 
-    source /seeds.sql
+    source .db/seeds.sql
 ```
 
 The application will then be invoked by using the following command:
 
-    node index.js
+    npm start
 
 ## Directory Structure
 
